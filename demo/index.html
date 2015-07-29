@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>text-figure Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../text-figure.html">
+    <link rel="import" href="../../iron-selector/iron-selector.html">
     <style type="text/css">
       #column {
         width: 80%;
@@ -25,26 +26,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body>
     <div id="column">
-      <text-figure>
-        <img src="http://i.imgur.com/lko9PNL.jpg" image/>
-        <div description>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat.</p>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-          anim id est laborum.</p>
-        </div>
-      </text-figure>
-      <text-figure>
-        <img src="http://i.imgur.com/IZpksc0.jpg" image/>
-        <div description>Another description!</div>
-      </text-figure>
+      <iron-selector id="selector" selected="0" multi>
+        <text-figure id="fig1">
+          <img src="http://i.imgur.com/lko9PNL.jpg" image/>
+          <div description>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+            aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse 
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit 
+            anim id est laborum.</p>
+          </div>
+        </text-figure>
+        <text-figure id="fig2">
+          <img src="http://i.imgur.com/IZpksc0.jpg" image/>
+          <div description>Another description!</div>
+        </text-figure>
+      </iron-selector>
     </div>
 
     <script type="text/javascript">
+      var selector = document.querySelector('#selector');
+      selector.selectedAttribute = "selected";
+      selector.selected = -1;
+      selector.addEventListener('iron-deselect', function (evt) {
+        console.log(evt);
+      });
+      selector.addEventListener('iron-select', function (evt) {
+        console.log(evt);
+      });
+
       var textFigures = document.querySelectorAll('text-figure');
 
       var selectTarget = function (willSelect, element) {
@@ -80,12 +93,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         };
       };
-      for (var i = 0; i < textFigures.length; i++) {
-        textFigures[i].addEventListener('mouseover', selectTarget(true, textFigures[i]));
-        textFigures[i].addEventListener('mouseout', selectTarget(false, textFigures[i]));
-        textFigures[i].addEventListener('touchstart', startTouch);
-        textFigures[i].addEventListener('touchend', toggleSelected(textFigures[i]));
-      }
+      // for (var i = 0; i < textFigures.length; i++) {
+      //   textFigures[i].addEventListener('mouseover', selectTarget(true, textFigures[i]));
+      //   textFigures[i].addEventListener('mouseout', selectTarget(false, textFigures[i]));
+      //   textFigures[i].addEventListener('touchstart', startTouch);
+      //   textFigures[i].addEventListener('touchend', toggleSelected(textFigures[i]));
+      // }
     </script>
   </body>
 </html>
