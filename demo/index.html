@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>text-figure Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../text-figure.html">
+    <style type="text/css">
+      #column {
+        width: 80%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="column">
+      <text-figure>
+        <img src="http://i.imgur.com/lko9PNL.jpg" image/>
+        <div description>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+          aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse 
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+          cupidatat non proident, sunt in culpa qui officia deserunt mollit 
+          anim id est laborum.</p>
+        </div>
+      </text-figure>
+      <text-figure>
+        <img src="http://i.imgur.com/IZpksc0.jpg" image/>
+        <div description>Another description!</div>
+      </text-figure>
+    </div>
+
+    <script type="text/javascript">
+      var textFigures = document.querySelectorAll('text-figure');
+
+      var selectTarget = function (willSelect, element) {
+        return function (evt) {
+          element.selected = willSelect;
+        };
+      };
+
+      var touchedElm = null;
+      var startTouch = function (evt) {
+        console.log(evt);
+        touchedElm = document.elementFromPoint(
+          evt.changedTouches[evt.changedTouches.length - 1].clientX,
+          evt.changedTouches[evt.changedTouches.length - 1].clientY);
+        console.log(touchedElm);
+      }
+
+      var toggleSelected = function (element) {
+        return function (evt) {
+          var upElm = document.elementFromPoint(
+            evt.changedTouches[evt.changedTouches.length - 1].clientX,
+            evt.changedTouches[evt.changedTouches.length - 1].clientY);
+          console.log(upElm);
+          if (touchedElm != upElm) {
+            console.log('up on different element');
+          } else {
+            for (var i = 0; i < evt.path.length; i++) {
+              if (evt.path[i] == element) {
+                element.toggleSelected();
+                return;
+              }
+            }
+          }
+        };
+      };
+      for (var i = 0; i < textFigures.length; i++) {
+        textFigures[i].addEventListener('mouseover', selectTarget(true, textFigures[i]));
+        textFigures[i].addEventListener('mouseout', selectTarget(false, textFigures[i]));
+        textFigures[i].addEventListener('touchstart', startTouch);
+        textFigures[i].addEventListener('touchend', toggleSelected(textFigures[i]));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "text-figure",
+  "version": "1.0.0",
+  "authors": [
+    "David Isaac Lee <david@david-lee.net>"
+  ],
+  "description": "An element displaying an image and description text.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer"
+  ],
+  "main": "text-figure.html",
+  "homepage": "https://github.com/davidisaaclee/text-figure/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-media-query": "PolymerElements/iron-media-query#~1.0.2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
