@@ -14,13 +14,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>text-figure Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
     <link rel="import" href="../text-figure.html">
     <link rel="import" href="../../iron-selector/iron-selector.html">
     <style type="text/css">
       #column {
-        width: 80%;
-        max-width: 800px;
+        /*width: 80%;
+        max-width: 800px;*/
+        width: 100%;
         margin: 0 auto;
+      }
+
+      body {
+        --mobile-description: {
+          color: white;
+          font-family: 'Helvetica', sans-serif;
+        };
+      }
+
+      text-figure .description[mobile] {
+        color: white;
+        font-family: 'Helvetica', sans-serif;
       }
     </style>
   </head>
